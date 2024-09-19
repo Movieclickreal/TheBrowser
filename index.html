@@ -3,95 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harry Potter Movie Collection</title>
+    <title>Simple Chat</title>
     <style>
         body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(120deg, #000000, #0000ff);
-    margin: 0;
-    padding: 0;
-    animation: gradientAnimation 10s ease infinite;
-}
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
 
-@keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+        #chat-container {
+            width: 300px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-}
+        #chat-box {
+            height: 200px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
 
-.movie {
-    margin: 20px 0;
-    transition: transform 0.3s ease;
-}
+        #message-input {
+            width: calc(100% - 60px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
 
-.movie:hover {
-    transform: scale(1.05);
-}
-
-iframe {
-    width: 100%;
-    height: 500px;
-    border: none;
-}
-
+        #send-button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Harry Potter Movie Collection</h1>
-        <div class="movie show-info" id="tt0295297">
-            <h2>Harry Potter and the Chamber of Secrets</h2>
-            <p id="actors-tt0295297"></p>
-            <iframe src="https://vidsrc.xyz/embed/tv/tt0295297" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
-        </div>
-        <div class="movie show-info" id="tt0241527">
-            <h2>Harry Potter and the Sorcerer's Stone</h2>
-            <p id="actors-tt0241527"></p>
-            <iframe src="https://vidsrc.xyz/embed/tv/tt0241527" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
-        </div>
-        <!-- Add the rest of the Harry Potter movies here -->
-        <div class="movie show-info" id="tt0304141">
-            <h2>Harry Potter and the Prisoner of Azkaban</h2>
-            <p id="actors-tt0304141"></p>
-            <iframe src="https://vidsrc.xyz/embed/tv/tt0304141" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
-        </div>
-        <div class="movie show-info" id="tt0330373">
-            <h2>Harry Potter and the Goblet of Fire</h2>
-            <p id="actors-tt0330373"></p>
-            <iframe src="https://vidsrc.xyz/embed/tv/tt0330373" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
-        </div>
-        <div class="movie show-info" id="tt0373889">
-            <h2>Harry Potter and the Order of the Phoenix</h2>
-            <p id="actors-tt0373889"></p>
-            <iframe src="https://vidsrc.xyz/embed/tv/tt0373889" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
-        </div>
-        <div class="movie show-info" id="tt0417741">
-            <h2>Harry Potter and the Half-Blood Prince</h2>
-            <p id="actors-tt0417741"></p>
-            <iframe src="https://vidsrc.xyz/embed/tv/tt0417741" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
-        </div>
-        <div class="movie show-info" id="tt0926084">
-            <h2>Harry Potter and the Deathly Hallows: Part 1</h2>
-            <p id="actors-tt0926084"></p>
-            <iframe src="https://vidsrc.xyz/embed/tv/tt0926084" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
-        </div>
-        <div class="movie show-info" id="tt1201607">
-            <h2>Harry Potter and the Deathly Hallows: Part 2</h2>
-            <p id="actors-tt1201607"></p>
-            <iframe src="https://vidsrc.xyz/embed/tv/tt1201607" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
-        </div>
+    <div id="chat-container">
+        <div id="chat-box"></div>
+        <input type="text" id="message-input" placeholder="Type a message...">
+        <button id="send-button">Send</button>
     </div>
+    <script>
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+
+        function sendMessage() {
+            const messageInput = document.getElementById('message-input');
+            const message = messageInput.value;
+            if (message.trim() !== '') {
+                const chatBox = document.getElementById('chat-box');
+                const messageElement = document.createElement('div');
+                messageElement.textContent = message;
+                chatBox.appendChild(messageElement);
+                messageInput.value = '';
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+    </script>
 </body>
 </html>
