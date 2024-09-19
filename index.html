@@ -16,25 +16,45 @@
         }
 
         #chat-container {
-            width: 300px;
+            width: 400px;
             border: 1px solid #ccc;
             background-color: #fff;
-            padding: 10px;
+            padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
 
         #chat-box {
-            height: 200px;
+            height: 300px;
             overflow-y: scroll;
             border: 1px solid #ccc;
             padding: 10px;
             margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .message {
+            padding: 5px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        .message.sent {
+            background-color: #d1e7dd;
+            text-align: right;
+        }
+
+        .message.received {
+            background-color: #f8d7da;
+            text-align: left;
         }
 
         #message-input {
-            width: calc(100% - 60px);
+            width: calc(100% - 70px);
             padding: 10px;
             border: 1px solid #ccc;
+            border-radius: 5px;
             margin-right: 10px;
         }
 
@@ -44,6 +64,7 @@
             background-color: #007bff;
             color: #fff;
             cursor: pointer;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -55,6 +76,7 @@
     </div>
     <script>
         document.getElementById('send-button').addEventListener('click', sendMessage);
+        window.addEventListener('load', loadMessages);
 
         function sendMessage() {
             const messageInput = document.getElementById('message-input');
@@ -63,10 +85,30 @@
                 const chatBox = document.getElementById('chat-box');
                 const messageElement = document.createElement('div');
                 messageElement.textContent = message;
+                messageElement.classList.add('message', 'sent');
                 chatBox.appendChild(messageElement);
+                saveMessage('sent', message);
                 messageInput.value = '';
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
+        }
+
+        function saveMessage(type, message) {
+            const messages = JSON.parse(localStorage.getItem('messages')) || [];
+            messages.push({ type, message });
+            localStorage.setItem('messages', JSON.stringify(messages));
+        }
+
+        function loadMessages() {
+            const messages = JSON.parse(localStorage.getItem('messages')) || [];
+            const chatBox = document.getElementById('chat-box');
+            messages.forEach(msg => {
+                const messageElement = document.createElement('div');
+                messageElement.textContent = msg.message;
+                messageElement.classList.add('message', msg.type);
+                chatBox.appendChild(messageElement);
+            });
+            chatBox.scrollTop = chatBox.scrollHeight;
         }
     </script>
 </body>
