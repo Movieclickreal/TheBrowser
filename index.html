@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        iframe {
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Website Viewer</h1>
+    <form id="websiteForm" onsubmit="return false;">
+        <label for="websiteUrl">Enter website URL:</label>
+        <input type="url" id="websiteUrl" name="websiteUrl" placeholder="e.g., https://www.example.com" required>
+        <button type="button" onclick="loadWebsite()">Load Website</button>
+    </form>
+    <iframe id="websiteFrame" width="100%" height="600px"></iframe>
+
+    <script>
+        function loadWebsite() {
+            const url = document.getElementById('websiteUrl').value;
+            if (url) {
+                try {
+                    new URL(url); // Validate URL format
+                    document.getElementById('websiteFrame').src = url;
+                } catch (e) {
+                    alert('Please enter a valid URL.');
+                }
+            } else {
+                alert('Please enter a URL.');
+            }
+        }
+    </script>
+</body>
+</html>
