@@ -3,42 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Viewer</title>
+    <title>Harry Potter Movie Collection</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        iframe {
-            border: 1px solid #ccc;
-            margin-top: 20px;
-        }
+    font-family: Arial, sans-serif;
+    background: linear-gradient(120deg, #000000, #0000ff);
+    margin: 0;
+    padding: 0;
+    animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.movie {
+    margin: 20px 0;
+    transition: transform 0.3s ease;
+}
+
+.movie:hover {
+    transform: scale(1.05);
+}
+
+iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+}
+
     </style>
 </head>
 <body>
-    <h1>Website Viewer</h1>
-    <form id="websiteForm" onsubmit="return false;">
-        <label for="websiteUrl">Enter website URL:</label>
-        <input type="url" id="websiteUrl" name="websiteUrl" placeholder="e.g., https://www.example.com" required>
-        <button type="button" onclick="loadWebsite()">Load Website</button>
-    </form>
-    <iframe id="websiteFrame" width="100%" height="600px"></iframe>
-
-    <script>
-        function loadWebsite() {
-            const url = document.getElementById('websiteUrl').value;
-            if (url) {
-                try {
-                    new URL(url); // Validate URL format
-                    document.getElementById('websiteFrame').src = url;
-                } catch (e) {
-                    alert('Please enter a valid URL.');
-                }
-            } else {
-                alert('Please enter a URL.');
-            }
-        }
-    </script>
+    <div class="container">
+        <h1>Harry Potter Movie Collection</h1>
+        <div class="movie show-info" id="tt0295297">
+            <h2>Harry Potter and the Chamber of Secrets</h2>
+            <p id="actors-tt0295297"></p>
+            <iframe src="https://vidsrc.xyz/embed/tv/tt0295297" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+        <div class="movie show-info" id="tt0241527">
+            <h2>Harry Potter and the Sorcerer's Stone</h2>
+            <p id="actors-tt0241527"></p>
+            <iframe src="https://vidsrc.xyz/embed/tv/tt0241527" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+        <!-- Add the rest of the Harry Potter movies here -->
+        <div class="movie show-info" id="tt0304141">
+            <h2>Harry Potter and the Prisoner of Azkaban</h2>
+            <p id="actors-tt0304141"></p>
+            <iframe src="https://vidsrc.xyz/embed/tv/tt0304141" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+        <div class="movie show-info" id="tt0330373">
+            <h2>Harry Potter and the Goblet of Fire</h2>
+            <p id="actors-tt0330373"></p>
+            <iframe src="https://vidsrc.xyz/embed/tv/tt0330373" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+        <div class="movie show-info" id="tt0373889">
+            <h2>Harry Potter and the Order of the Phoenix</h2>
+            <p id="actors-tt0373889"></p>
+            <iframe src="https://vidsrc.xyz/embed/tv/tt0373889" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+        <div class="movie show-info" id="tt0417741">
+            <h2>Harry Potter and the Half-Blood Prince</h2>
+            <p id="actors-tt0417741"></p>
+            <iframe src="https://vidsrc.xyz/embed/tv/tt0417741" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+        <div class="movie show-info" id="tt0926084">
+            <h2>Harry Potter and the Deathly Hallows: Part 1</h2>
+            <p id="actors-tt0926084"></p>
+            <iframe src="https://vidsrc.xyz/embed/tv/tt0926084" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+        <div class="movie show-info" id="tt1201607">
+            <h2>Harry Potter and the Deathly Hallows: Part 2</h2>
+            <p id="actors-tt1201607"></p>
+            <iframe src="https://vidsrc.xyz/embed/tv/tt1201607" referrerpolicy="origin" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+    </div>
 </body>
 </html>
