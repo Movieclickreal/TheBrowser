@@ -3,112 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Chat</title>
+    <title>IMDb Search</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .search-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
+            margin-bottom: 20px;
         }
-
-        #chat-container {
-            width: 400px;
-            border: 1px solid #ccc;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+        .search-container div {
+            margin: 0 10px;
         }
-
-        #chat-box {
-            height: 300px;
-            overflow-y: scroll;
-            border: 1px solid #ccc;
+        input {
             padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-
-        .message {
-            padding: 5px;
-            margin: 5px 0;
-            border-radius: 5px;
-        }
-
-        .message.sent {
-            background-color: #d1e7dd;
-            text-align: right;
-        }
-
-        .message.received {
-            background-color: #f8d7da;
-            text-align: left;
-        }
-
-        #message-input {
-            width: calc(100% - 70px);
-            padding: 10px;
+            width: 250px;
             border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: 10px;
+            border-radius: 4px;
         }
-
-        #send-button {
-            padding: 10px;
-            border: 1px solid #ccc;
-            background-color: #007bff;
-            color: #fff;
+        button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 4px;
             cursor: pointer;
-            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        iframe {
+            display: block;
+            margin: 0 auto;
+            width: 80%;
+            height: 500px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <div id="chat-container">
-        <div id="chat-box"></div>
-        <input type="text" id="message-input" placeholder="Type a message...">
-        <button id="send-button">Send</button>
+    <h1>IMDb Search</h1>
+    <div class="search-container">
+        <div>
+            <label for="movieSearch">Movie IMDb tt Number:</label>
+            <input type="text" id="movieSearch" placeholder="Enter IMDb tt number for movies">
+            <button onclick="updateIframe('movie')">Search Movie</button>
+        </div>
+        <div>
+            <label for="tvSearch">TV Show IMDb tt Number:</label>
+            <input type="text" id="tvSearch" placeholder="Enter IMDb tt number for TV shows">
+            <button onclick="updateIframe('tv')">Search TV Show</button>
+        </div>
     </div>
+    <iframe src="" frameborder="0" allowfullscreen></iframe>
     <script>
-        document.getElementById('send-button').addEventListener('click', sendMessage);
-        window.addEventListener('load', loadMessages);
-
-        function sendMessage() {
-            const messageInput = document.getElementById('message-input');
-            const message = messageInput.value;
-            if (message.trim() !== '') {
-                const chatBox = document.getElementById('chat-box');
-                const messageElement = document.createElement('div');
-                messageElement.textContent = message;
-                messageElement.classList.add('message', 'sent');
-                chatBox.appendChild(messageElement);
-                saveMessage('sent', message);
-                messageInput.value = '';
-                chatBox.scrollTop = chatBox.scrollHeight;
+        function updateIframe(type) {
+            let ttNumber;
+            if (type === 'movie') {
+                ttNumber = document.getElementById('movieSearch').value;
+                document.getElementById('iframe').src = `https://vidsrc.xyz/embed/movie/${ttNumber}`;
+            } else if (type === 'tv') {
+                ttNumber = document.getElementById('tvSearch').value;
+                document.getElementById('iframe').src = `https://vidsrc.xyz/embed/tv/${ttNumber}`;
             }
-        }
-
-        function saveMessage(type, message) {
-            const messages = JSON.parse(localStorage.getItem('messages')) || [];
-            messages.push({ type, message });
-            localStorage.setItem('messages', JSON.stringify(messages));
-        }
-
-        function loadMessages() {
-            const messages = JSON.parse(localStorage.getItem('messages')) || [];
-            const chatBox = document.getElementById('chat-box');
-            messages.forEach(msg => {
-                const messageElement = document.createElement('div');
-                messageElement.textContent = msg.message;
-                messageElement.classList.add('message', msg.type);
-                chatBox.appendChild(messageElement);
-            });
-            chatBox.scrollTop = chatBox.scrollHeight;
         }
     </script>
 </body>
